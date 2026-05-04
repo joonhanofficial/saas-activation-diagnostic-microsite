@@ -23,15 +23,16 @@
     <main>
         <section class="hero">
             <div class="container">
+                <div class="hero-framing">The headline metric looked stable. The useful signal appeared only after segmentation.</div>
                 <h1>When SaaS Activation Looks Stable<br>Until You Segment It</h1>
                 <p class="subtitle">A subscription-level diagnostic of how activation quality shifted across source and plan segments.</p>
                 
                 <div class="stats-container">
-                    <div class="stat-card">
+                    <div class="stat-card primary-stat">
                         <div class="stat-value" id="activation-rate">0%</div>
                         <div class="stat-label">Overall Activation Rate</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card secondary-stat">
                         <div class="stat-value">2,546 <span class="stat-sub">/ 5,000</span></div>
                         <div class="stat-label">Activated Subscriptions</div>
                     </div>
@@ -45,147 +46,203 @@
             </div>
         </section>
 
-        <section id="problem" class="container">
-            <h2>The headline activation rate was not the full story.</h2>
-            <p>A stable aggregate activation rate can hide where product adoption is stronger or weaker. The business question was not whether activation existed, but where activation quality changed by acquisition source and plan tier.</p>
-        </section>
+        <div class="diagnostic-flow">
+            <!-- Problem -->
+            <section id="problem" class="container content-section">
+                <div class="section-badge">01. Headline Metric</div>
+                <h2>The headline activation rate was not the full story.</h2>
+                <p>A stable aggregate activation rate can hide where product adoption is stronger or weaker. The business question was not whether activation existed, but where activation quality changed by acquisition source and plan tier.</p>
+            </section>
 
-        <section id="method" class="container">
-            <h2>From unstable timing logic to a stronger activation rule.</h2>
-            <div class="card-grid">
-                <div class="interactive-card">
-                    <h3>Timing logic tested</h3>
-                    <div class="card-reveal">
-                        <p>The first instinct was to measure activation through time-to-first-usage logic.</p>
+            <!-- Method Challenge -->
+            <section id="method" class="container content-section">
+                <div class="section-badge">02. Method Challenge</div>
+                <h2>From unstable timing logic to a stronger activation rule.</h2>
+                <div class="card-grid method-grid">
+                    <div class="interactive-card method-card" tabindex="0">
+                        <div class="card-number">01</div>
+                        <h3>Timing logic tested</h3>
+                        <div class="card-reveal">
+                            <p><strong>What it means:</strong> Measuring activation through time-to-first-usage logic.<br><br><strong>Why it mattered:</strong> This is the default approach for many SaaS products, assuming faster usage equals better activation.</p>
+                        </div>
+                    </div>
+                    <div class="interactive-card method-card" tabindex="0">
+                        <div class="card-number">02</div>
+                        <h3>Timing logic rejected</h3>
+                        <div class="card-reveal">
+                            <p><strong>Why it mattered:</strong> A large share of subscriptions showed first usage earlier than subscription start.<br><br><strong>Risk solved:</strong> Prevented false positives by discarding unreliable sequencing logic.</p>
+                        </div>
+                    </div>
+                    <div class="interactive-card method-card" tabindex="0">
+                        <div class="card-number">03</div>
+                        <h3>Usage depth summarized</h3>
+                        <div class="card-reveal">
+                            <p><strong>What it means:</strong> Shifting focus to actual usage records and distinct feature utilization.<br><br><strong>Why it mattered:</strong> Reflects deeper product engagement instead of simple login timestamps.</p>
+                        </div>
+                    </div>
+                    <div class="interactive-card method-card" tabindex="0">
+                        <div class="card-number">04</div>
+                        <h3>Final activation rule selected</h3>
+                        <div class="card-reveal">
+                            <p><strong>What it means:</strong> A stricter rule based strictly on engagement depth.<br><br><strong>Risk solved:</strong> Made the metric more defensible by removing timing artifacts.</p>
+                        </div>
+                    </div>
+                    <div class="interactive-card method-card" tabindex="0">
+                        <div class="card-number">05</div>
+                        <h3>Segmentation prepared for Tableau</h3>
+                        <div class="card-reveal">
+                            <p><strong>What it means:</strong> Building the final subscription-level table exported to CSV.<br><br><strong>Why it mattered:</strong> Enabled segmented views by referral source and plan tier.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="interactive-card">
-                    <h3>Timing logic rejected</h3>
-                    <div class="card-reveal">
-                        <p>This method did not hold up cleanly once the tables were joined. A large share of subscriptions showed first usage earlier than subscription start, which made a simple time-based activation definition unreliable.</p>
-                    </div>
-                </div>
-                <div class="interactive-card">
-                    <h3>Usage depth summarized</h3>
-                    <div class="card-reveal">
-                        <p>The analysis shifted to focus on usage records and distinct feature use to reflect deeper product engagement.</p>
-                    </div>
-                </div>
-                <div class="interactive-card">
-                    <h3>Final activation rule selected</h3>
-                    <div class="card-reveal">
-                        <p>A stricter activation rule based on usage depth made the metric more defensible, reflecting true engagement rather than timing artifacts.</p>
-                    </div>
-                </div>
-                <div class="interactive-card">
-                    <h3>Segmentation prepared for Tableau</h3>
-                    <div class="card-reveal">
-                        <p>Built the final subscription-level analysis table and exported to CSV to build segmented views by referral source, plan tier, and interaction.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="overview" class="container center-text">
-            <h2>Activation Overview</h2>
-            <div class="progress-ring-container">
-                <svg class="progress-ring" width="200" height="200">
-                    <circle class="progress-ring-bg" cx="100" cy="100" r="80"></circle>
-                    <circle class="progress-ring-fill" cx="100" cy="100" r="80"></circle>
-                </svg>
-                <div class="progress-text">
-                    <span class="progress-value">50.92%</span>
-                    <span class="progress-label">2,546 / 5,000</span>
+            <!-- Overview -->
+            <section id="overview" class="container content-section">
+                <div class="section-badge">03. Segmentation Lens</div>
+                <h2>Activation Overview</h2>
+                <div class="overview-layout">
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="220" height="220">
+                            <defs>
+                                <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#008080" />
+                                    <stop offset="100%" stop-color="#1f6feb" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="progress-ring-bg" cx="110" cy="110" r="90"></circle>
+                            <circle class="progress-ring-fill" cx="110" cy="110" r="90"></circle>
+                        </svg>
+                        <div class="progress-text">
+                            <span class="progress-value">50.92%</span>
+                            <span class="progress-label">2,546 / 5,000</span>
+                        </div>
+                    </div>
+                    <div class="overview-interpretation">
+                        <p>50.92% looked acceptable at the aggregate level, but it was not enough to understand where activation quality changed.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="source-signal" class="container">
-            <h2>Referral Source Signal</h2>
-            <div class="bar-chart">
-                <div class="bar-row interactive-bar">
-                    <div class="bar-label">Organic</div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 53.08%;">53.08%</div>
+            <!-- Source Signal -->
+            <section id="source-signal" class="container content-section">
+                <div class="section-badge">04. Source Signal</div>
+                <h2>Referral Source Signal</h2>
+                <div class="bar-chart">
+                    <div class="bar-row interactive-bar" tabindex="0">
+                        <div class="bar-label">Organic</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 53.08%;">53.08%</div>
+                        </div>
+                        <div class="bar-reveal">Strongest activation signal</div>
                     </div>
-                    <div class="bar-reveal">Strongest activation signal</div>
-                </div>
-                <div class="bar-row interactive-bar">
-                    <div class="bar-label">Event</div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 52.89%;">52.89%</div>
+                    <div class="bar-row interactive-bar" tabindex="0">
+                        <div class="bar-label">Event</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 52.89%;">52.89%</div>
+                        </div>
+                        <div class="bar-reveal">Strong event-driven activation</div>
                     </div>
-                    <div class="bar-reveal">Strong event-driven activation</div>
-                </div>
-                <div class="bar-row interactive-bar">
-                    <div class="bar-label">Partner</div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 49.77%;">49.77%</div>
+                    <div class="bar-row interactive-bar" tabindex="0">
+                        <div class="bar-label">Partner</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 49.77%;">49.77%</div>
+                        </div>
+                        <div class="bar-reveal">Middling, needs closer review</div>
                     </div>
-                    <div class="bar-reveal">Middling, needs closer review</div>
-                </div>
-                <div class="bar-row interactive-bar">
-                    <div class="bar-label">Ads</div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 49.40%;">49.40%</div>
+                    <div class="bar-row interactive-bar" tabindex="0">
+                        <div class="bar-label">Ads</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 49.40%;">49.40%</div>
+                        </div>
+                        <div class="bar-reveal">Weaker activation quality</div>
                     </div>
-                    <div class="bar-reveal">Weaker activation quality</div>
-                </div>
-                <div class="bar-row interactive-bar">
-                    <div class="bar-label">Other</div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 49.17%;">49.17%</div>
+                    <div class="bar-row interactive-bar" tabindex="0">
+                        <div class="bar-label">Other</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 49.17%;">49.17%</div>
+                        </div>
+                        <div class="bar-reveal">Weakest group in this view</div>
                     </div>
-                    <div class="bar-reveal">Weakest group in this view</div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="plan-signal" class="container">
-            <h2>Plan Tier Signal</h2>
-            <div class="card-grid plan-grid">
-                <div class="interactive-card plan-card">
-                    <div class="plan-name">Basic</div>
-                    <div class="plan-value">52.25%</div>
-                    <div class="card-reveal">
-                        <p>Strongest plan-tier activation signal</p>
+            <!-- Plan Signal -->
+            <section id="plan-signal" class="container content-section">
+                <div class="section-badge">05. Plan Tier Signal</div>
+                <h2>Plan Tier Signal</h2>
+                <div class="card-grid plan-grid">
+                    <div class="interactive-card plan-card" tabindex="0">
+                        <div class="plan-name">Basic</div>
+                        <div class="plan-value">52.25%</div>
+                        <div class="card-reveal">
+                            <p>Strongest plan-tier activation signal</p>
+                        </div>
+                    </div>
+                    <div class="interactive-card plan-card" tabindex="0">
+                        <div class="plan-name">Pro</div>
+                        <div class="plan-value">51.46%</div>
+                        <div class="card-reveal">
+                            <p>Stable but not clearly strongest</p>
+                        </div>
+                    </div>
+                    <div class="interactive-card plan-card" tabindex="0">
+                        <div class="plan-name">Enterprise</div>
+                        <div class="plan-value">49.16%</div>
+                        <div class="card-reveal">
+                            <p>Weaker activation despite higher commercial expectation</p>
+                        </div>
                     </div>
                 </div>
-                <div class="interactive-card plan-card">
-                    <div class="plan-name">Pro</div>
-                    <div class="plan-value">51.46%</div>
-                    <div class="card-reveal">
-                        <p>Stable but not clearly strongest</p>
-                    </div>
-                </div>
-                <div class="interactive-card plan-card">
-                    <div class="plan-name">Enterprise</div>
-                    <div class="plan-value">49.16%</div>
-                    <div class="card-reveal">
-                        <p>Weaker activation despite higher commercial expectation</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="interpretation" class="container">
-            <h2>The average was not wrong. It was incomplete.</h2>
-            <p>The aggregate rate gave a starting point, but the useful signal appeared only after segmentation. Activation quality was not just a product metric. It was shaped by acquisition source, plan tier, and the interaction between them.</p>
-        </section>
+            <!-- New Insight Section -->
+            <section id="insights" class="container content-section">
+                <div class="section-badge">06. Final Interpretation</div>
+                <h2>The useful signal was not the average. It was the pattern underneath it.</h2>
+                <div class="card-grid insight-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">1</div>
+                        <h3>Source quality shaped activation</h3>
+                        <p>Organic and event channels brought in significantly stronger cohorts than paid ads.</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">2</div>
+                        <h3>Plan tier changed the interpretation</h3>
+                        <p>Enterprise plans, despite higher value, underperformed the cheaper tiers in pure activation rate.</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">3</div>
+                        <h3>Interaction between source and plan mattered most</h3>
+                        <p>Activation quality was not just a product metric. It was shaped by acquisition context and subscription context together.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-        <section id="links" class="container">
+        <!-- CTA Ending -->
+        <section id="links" class="container cta-ending">
             <div id="full-case-study" class="cta-section">
-                <h3>Continue the Full Case Study</h3>
+                <div class="cta-content">
+                    <h3>Continue the Full Case Study</h3>
+                    <p>Read the complete analytical breakdown, including the Tableau dashboard and SQL logic used to isolate the activation signal.</p>
+                </div>
                 <a href="https://www.joonhananalytics.com/case-studies/acquisition-quality" target="_blank" class="btn primary">Read Full Case Study</a>
             </div>
 
             <div id="github" class="cta-section">
-                <h3>Inspect the Project Repo</h3>
+                <div class="cta-content">
+                    <h3>Inspect the Project Repo</h3>
+                    <p>Review the raw datasets, Python preprocessing notebooks, and final table structures used for this diagnostic.</p>
+                </div>
                 <a href="https://github.com/joonhanofficial/saas-activation-diagnostic" target="_blank" class="btn secondary">View GitHub Repo</a>
             </div>
 
             <div id="contact" class="cta-section">
-                <h3>Connect With Me</h3>
+                <div class="cta-content">
+                    <h3>Connect With Me</h3>
+                    <p>Discuss analytical diagnostics, deep segmentation, or opportunities to optimize your activation models.</p>
+                </div>
                 <div class="contact-buttons">
                     <a href="https://www.joonhananalytics.com/contact" target="_blank" class="btn secondary">Portfolio Contact</a>
                     <a href="https://www.linkedin.com/in/joon-hanofficial" target="_blank" class="btn secondary">LinkedIn</a>

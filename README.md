@@ -1,8 +1,8 @@
 # SaaS Activation Diagnostic Microsite
 
 ## Purpose
-A one-page interactive microsite built for the analytics case study: **"When SaaS Activation Looks Stable Until You Segment It"**. 
-This project serves as an interactive proof asset to make the case study easier to inspect, understand, and share.
+A one-page interactive diagnostic microsite built for the analytics case study: **"When SaaS Activation Looks Stable Until You Segment It"**. 
+This project serves as an interactive proof asset with a premium command-center aesthetic, making the case study easier to inspect, understand, and share.
 
 ## Files Created
 - `index.html`: The main structure of the microsite.
