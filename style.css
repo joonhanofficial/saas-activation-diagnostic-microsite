@@ -34,6 +34,7 @@ body {
     linear-gradient(135deg, var(--bg), #091311 45%, #030706);
   color: var(--text);
   font-family: "Aptos", "Segoe UI", sans-serif;
+  font-size: 1.05rem;
   line-height: 1.6;
   text-rendering: geometricPrecision;
 }
@@ -137,6 +138,15 @@ a {
   text-transform: uppercase;
 }
 
+.hero-explainer {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  max-width: 640px;
+}
+
 h1,
 h2,
 h3,
@@ -147,7 +157,7 @@ p {
 h1 {
   max-width: 900px;
   margin-bottom: 22px;
-  font-size: clamp(3.25rem, 7.7vw, 7.2rem);
+  font-size: clamp(2.75rem, 6.5vw, 5.75rem);
   line-height: 0.94;
   letter-spacing: -0.06em;
 }
@@ -169,7 +179,7 @@ h2 {
 
 h3 {
   margin-bottom: 8px;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .business-question {
@@ -183,7 +193,7 @@ h3 {
 .split p,
 .proof p {
   color: var(--muted);
-  font-size: 1.04rem;
+  font-size: 1.1rem;
 }
 
 .tool-stack {
@@ -294,58 +304,113 @@ h3 {
   color: var(--text);
 }
 
-.signal-orbit {
-  position: relative;
+.diagnostic-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 32px 0 24px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.diag-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.diag-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.diag-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.diag-metric strong {
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--text);
+}
+
+.diag-metric span {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--soft);
+}
+
+.diag-interpretation {
+  font-size: 0.9rem !important;
+  color: var(--muted) !important;
+  margin: 0 !important;
+}
+
+.diag-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  width: 100%;
+}
+
+.diag-rows {
   display: grid;
-  place-items: center;
-  height: 270px;
-  margin: 36px 0 12px;
+  gap: 10px;
+  margin-top: 4px;
 }
 
-.signal-orbit::before,
-.signal-orbit::after,
-.signal-orbit span {
-  position: absolute;
-  content: "";
-  border: 1px solid rgba(111, 255, 210, 0.24);
-  border-radius: 50%;
+.diag-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 50px;
+  gap: 12px;
+  align-items: center;
 }
 
-.signal-orbit::before {
-  width: 240px;
-  height: 240px;
+.diag-row span {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--soft);
 }
 
-.signal-orbit::after {
-  width: 150px;
-  height: 150px;
-  border-color: rgba(242, 195, 107, 0.28);
+.diag-row strong {
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-align: right;
+  color: var(--text);
 }
 
-.signal-orbit span:nth-child(1) {
-  width: 22px;
-  height: 22px;
+.diag-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.diag-fill {
+  height: 100%;
+  width: var(--w);
+  border-radius: inherit;
+  transform-origin: left;
+  animation: growBar 1.15s ease both;
+}
+
+.diag-fill.strong {
   background: var(--accent);
-  box-shadow: 0 0 34px var(--accent);
-  animation: pulse 2.7s ease-in-out infinite;
 }
 
-.signal-orbit span:nth-child(2),
-.signal-orbit span:nth-child(3) {
-  width: 10px;
-  height: 10px;
-  border: 0;
+.diag-fill.warning {
   background: var(--accent-2);
 }
 
-.signal-orbit span:nth-child(2) {
-  translate: 92px -58px;
-}
-
-.signal-orbit span:nth-child(3) {
-  translate: -98px 74px;
-  background: var(--risk);
-}
 
 .hero-metric .counter,
 .large-number .counter {
@@ -466,7 +531,7 @@ h3 {
   padding-top: 0;
   overflow: hidden;
   color: var(--soft);
-  font-size: 0.93rem;
+  font-size: 0.98rem;
   line-height: 1.5;
   border-top: 1px solid transparent;
   opacity: 0;
@@ -659,11 +724,11 @@ h3 {
 }
 
 .increase {
-  background: linear-gradient(90deg, var(--accent), #a9ffe9);
+  background: linear-gradient(90deg, var(--accent), rgba(111, 255, 210, 0.7));
 }
 
 .review {
-  background: linear-gradient(90deg, var(--accent-2), #ffe0a0);
+  background: linear-gradient(90deg, rgba(111, 255, 210, 0.65), rgba(111, 255, 210, 0.3));
 }
 
 .hold {
@@ -671,7 +736,7 @@ h3 {
 }
 
 .reduce {
-  background: linear-gradient(90deg, var(--risk), #ffc0b7);
+  background: linear-gradient(90deg, rgba(111, 255, 210, 0.4), rgba(111, 255, 210, 0.15));
 }
 
 .large-number small {

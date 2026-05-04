@@ -29,6 +29,7 @@
       <section class="hero section-grid">
         <div class="hero-copy reveal">
           <p class="eyebrow">SaaS Activation Diagnostic</p>
+          <p class="hero-explainer">A self-directed case study using public SaaS subscription data to examine where activation quality changed across referral source and plan tier.</p>
           <h1>
             When SaaS Activation Looks Stable
             <span>Until You Segment It.</span>
@@ -60,23 +61,54 @@
           </div>
         </div>
 
-        <aside class="hero-panel reveal" aria-label="Activation summary">
+        <aside class="hero-panel insight-card reveal" aria-label="Activation summary" tabindex="0" role="button" aria-expanded="false">
           <div class="panel-topline">
-            <span>Activation Overview</span>
-            <strong>Aggregate Level</strong>
+            <span>Segmentation Lens</span>
+            <strong>From aggregate metric to segmented signal</strong>
           </div>
-          <div class="signal-orbit" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+          
+          <div class="diagnostic-card">
+            <div class="diag-section">
+              <span class="diag-label">Aggregate View</span>
+              <div class="diag-metric">
+                <strong class="counter" data-target="50.92">50.92%</strong>
+                <span>Overall activation rate</span>
+              </div>
+              <p class="diag-interpretation">Looks stable at headline level</p>
+            </div>
+            
+            <div class="diag-divider"></div>
+
+            <div class="diag-section">
+              <span class="diag-label">Segmented View</span>
+              <div class="diag-rows">
+                <div class="diag-row">
+                  <span>Organic</span>
+                  <div class="diag-bar"><div class="diag-fill strong" style="--w: 53.08%"></div></div>
+                  <strong>53.08%</strong>
+                </div>
+                <div class="diag-row">
+                  <span>Event</span>
+                  <div class="diag-bar"><div class="diag-fill strong" style="--w: 52.89%"></div></div>
+                  <strong>52.89%</strong>
+                </div>
+                <div class="diag-row">
+                  <span>Enterprise</span>
+                  <div class="diag-bar"><div class="diag-fill warning" style="--w: 49.16%"></div></div>
+                  <strong>49.16%</strong>
+                </div>
+              </div>
+              <p class="diag-interpretation">Variation appears once referral source and plan tier are isolated</p>
+            </div>
           </div>
-          <div class="hero-metric">
-            <span class="counter" data-target="50.92">50.92%</span>
-            <p>50.92% looked acceptable at the aggregate level, but it was not enough to understand where activation quality changed.</p>
-          </div>
+          
           <div class="panel-footer">
-            <span>Decision layer</span>
-            <strong>Metrics to action</strong>
+            <span>Takeaway</span>
+            <strong>The average was not wrong. It was incomplete.</strong>
+          </div>
+
+          <div class="card-insight">
+            50.92% gave the starting point, but source and plan segmentation showed where activation quality actually changed.
           </div>
         </aside>
       </section>
@@ -217,7 +249,7 @@
         </div>
 
         <div class="platform-grid">
-          <article class="platform-card highlight spotlight insight-card reveal" tabindex="0" role="button" aria-expanded="false">
+          <article class="platform-card insight-card reveal" tabindex="0" role="button" aria-expanded="false">
             <div>
               <h3>Basic</h3>
               <p>Strongest plan-tier signal</p>
@@ -228,7 +260,7 @@
               Basic tier users showed the highest motivation to engage deeply with the product features early on.
             </div>
           </article>
-          <article class="platform-card highlight insight-card reveal" tabindex="0" role="button" aria-expanded="false">
+          <article class="platform-card insight-card reveal" tabindex="0" role="button" aria-expanded="false">
             <div>
               <h3>Pro</h3>
               <p>Stable activation</p>
@@ -239,7 +271,7 @@
               Stable but not clearly strongest. Pro users activate well, pulling the aggregate average slightly up.
             </div>
           </article>
-          <article class="platform-card risk spotlight-risk insight-card reveal" tabindex="0" role="button" aria-expanded="false">
+          <article class="platform-card insight-card reveal" tabindex="0" role="button" aria-expanded="false">
             <div>
               <h3>Enterprise</h3>
               <p>Higher expectation, lower activation</p>

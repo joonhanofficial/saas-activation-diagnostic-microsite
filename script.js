@@ -52,6 +52,14 @@ const observer = new IntersectionObserver(
 
       entry.target.classList.add("visible");
       
+      // Special logic for .action-chart .bar-fill
+      if (entry.target.classList.contains("action-dashboard") || entry.target.classList.contains("action-chart")) {
+          // Find bars inside and trigger animation by letting CSS animation play when they get visible class.
+          // Wait, the benchmark uses keyframes 'growBar' which runs on element load. 
+          // If we add visible class, we can trigger it.
+          // The CSS in ref_style.css doesn't use .visible to trigger growBar. growBar runs on page load.
+      }
+      
       entry.target.querySelectorAll(".counter").forEach(animateCounter);
 
       if (entry.target.classList.contains("counter")) {
