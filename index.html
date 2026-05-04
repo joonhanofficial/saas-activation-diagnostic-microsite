@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When SaaS Activation Looks Stable Until You Segment It</title>
+    <meta name="description" content="A subscription-level diagnostic of how activation quality shifted across source and plan segments.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="brand">Joon Han | Digital Diagnostics</div>
+        <div class="nav-links">
+            <a href="#method">Method</a>
+            <a href="#source-signal">Source Signal</a>
+            <a href="#plan-signal">Plan Signal</a>
+            <a href="#links">Full Case Study</a>
+            <a href="#links">GitHub</a>
+            <a href="#links">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>When SaaS Activation Looks Stable<br>Until You Segment It</h1>
+                <p class="subtitle">A subscription-level diagnostic of how activation quality shifted across source and plan segments.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-value" id="activation-rate">0%</div>
+                        <div class="stat-label">Overall Activation Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">2,546 <span class="stat-sub">/ 5,000</span></div>
+                        <div class="stat-label">Activated Subscriptions</div>
+                    </div>
+                </div>
+
+                <div class="cta-group">
+                    <a href="#full-case-study" class="btn primary">Read Full Case Study</a>
+                    <a href="#github" class="btn secondary">View GitHub Repo</a>
+                    <a href="#contact" class="btn secondary">Contact / Portfolio</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="problem" class="container">
+            <h2>The headline activation rate was not the full story.</h2>
+            <p>A stable aggregate activation rate can hide where product adoption is stronger or weaker. The business question was not whether activation existed, but where activation quality changed by acquisition source and plan tier.</p>
+        </section>
+
+        <section id="method" class="container">
+            <h2>From unstable timing logic to a stronger activation rule.</h2>
+            <div class="card-grid">
+                <div class="interactive-card">
+                    <h3>Timing logic tested</h3>
+                    <div class="card-reveal">
+                        <p>The first instinct was to measure activation through time-to-first-usage logic.</p>
+                    </div>
+                </div>
+                <div class="interactive-card">
+                    <h3>Timing logic rejected</h3>
+                    <div class="card-reveal">
+                        <p>This method did not hold up cleanly once the tables were joined. A large share of subscriptions showed first usage earlier than subscription start, which made a simple time-based activation definition unreliable.</p>
+                    </div>
+                </div>
+                <div class="interactive-card">
+                    <h3>Usage depth summarized</h3>
+                    <div class="card-reveal">
+                        <p>The analysis shifted to focus on usage records and distinct feature use to reflect deeper product engagement.</p>
+                    </div>
+                </div>
+                <div class="interactive-card">
+                    <h3>Final activation rule selected</h3>
+                    <div class="card-reveal">
+                        <p>A stricter activation rule based on usage depth made the metric more defensible, reflecting true engagement rather than timing artifacts.</p>
+                    </div>
+                </div>
+                <div class="interactive-card">
+                    <h3>Segmentation prepared for Tableau</h3>
+                    <div class="card-reveal">
+                        <p>Built the final subscription-level analysis table and exported to CSV to build segmented views by referral source, plan tier, and interaction.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="container center-text">
+            <h2>Activation Overview</h2>
+            <div class="progress-ring-container">
+                <svg class="progress-ring" width="200" height="200">
+                    <circle class="progress-ring-bg" cx="100" cy="100" r="80"></circle>
+                    <circle class="progress-ring-fill" cx="100" cy="100" r="80"></circle>
+                </svg>
+                <div class="progress-text">
+                    <span class="progress-value">50.92%</span>
+                    <span class="progress-label">2,546 / 5,000</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="source-signal" class="container">
+            <h2>Referral Source Signal</h2>
+            <div class="bar-chart">
+                <div class="bar-row interactive-bar">
+                    <div class="bar-label">Organic</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 53.08%;">53.08%</div>
+                    </div>
+                    <div class="bar-reveal">Strongest activation signal</div>
+                </div>
+                <div class="bar-row interactive-bar">
+                    <div class="bar-label">Event</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 52.89%;">52.89%</div>
+                    </div>
+                    <div class="bar-reveal">Strong event-driven activation</div>
+                </div>
+                <div class="bar-row interactive-bar">
+                    <div class="bar-label">Partner</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 49.77%;">49.77%</div>
+                    </div>
+                    <div class="bar-reveal">Middling, needs closer review</div>
+                </div>
+                <div class="bar-row interactive-bar">
+                    <div class="bar-label">Ads</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 49.40%;">49.40%</div>
+                    </div>
+                    <div class="bar-reveal">Weaker activation quality</div>
+                </div>
+                <div class="bar-row interactive-bar">
+                    <div class="bar-label">Other</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 49.17%;">49.17%</div>
+                    </div>
+                    <div class="bar-reveal">Weakest group in this view</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="plan-signal" class="container">
+            <h2>Plan Tier Signal</h2>
+            <div class="card-grid plan-grid">
+                <div class="interactive-card plan-card">
+                    <div class="plan-name">Basic</div>
+                    <div class="plan-value">52.25%</div>
+                    <div class="card-reveal">
+                        <p>Strongest plan-tier activation signal</p>
+                    </div>
+                </div>
+                <div class="interactive-card plan-card">
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-value">51.46%</div>
+                    <div class="card-reveal">
+                        <p>Stable but not clearly strongest</p>
+                    </div>
+                </div>
+                <div class="interactive-card plan-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-value">49.16%</div>
+                    <div class="card-reveal">
+                        <p>Weaker activation despite higher commercial expectation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interpretation" class="container">
+            <h2>The average was not wrong. It was incomplete.</h2>
+            <p>The aggregate rate gave a starting point, but the useful signal appeared only after segmentation. Activation quality was not just a product metric. It was shaped by acquisition source, plan tier, and the interaction between them.</p>
+        </section>
+
+        <section id="links" class="container">
+            <div id="full-case-study" class="cta-section">
+                <h3>Continue the Full Case Study</h3>
+                <a href="https://www.joonhananalytics.com/case-studies/acquisition-quality" target="_blank" class="btn primary">Read Full Case Study</a>
+            </div>
+
+            <div id="github" class="cta-section">
+                <h3>Inspect the Project Repo</h3>
+                <a href="https://github.com/joonhanofficial/saas-activation-diagnostic" target="_blank" class="btn secondary">View GitHub Repo</a>
+            </div>
+
+            <div id="contact" class="cta-section">
+                <h3>Connect With Me</h3>
+                <div class="contact-buttons">
+                    <a href="https://www.joonhananalytics.com/contact" target="_blank" class="btn secondary">Portfolio Contact</a>
+                    <a href="https://www.linkedin.com/in/joon-hanofficial" target="_blank" class="btn secondary">LinkedIn</a>
+                    <a href="mailto:joonhan.work@gmail.com" class="btn secondary">Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container center-text">
+            <p>&copy; Joon Han | Digital Diagnostics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
