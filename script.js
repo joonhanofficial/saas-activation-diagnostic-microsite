@@ -1,123 +1,128 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+const revealItems = document.querySelectorAll(".reveal");
+const counters = document.querySelectorAll(".counter");
+const insightCards = document.querySelectorAll(".insight-card");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function formatNumber(value, hasDecimals) {
+  if (hasDecimals) {
+    return new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+  }
+  return new Intl.NumberFormat("en-US").format(Math.round(value));
+}
+
+function animateCounter(counter) {
+  if (counter.dataset.animated === "true") return;
+
+  const targetStr = counter.dataset.target;
+  const target = Number(targetStr);
+  const hasDecimals = targetStr.includes(".");
+  const hasPercent = counter.textContent.includes("%");
+  
+  counter.dataset.animated = "true";
+
+  if (reducedMotion) {
+    counter.textContent = formatNumber(target, hasDecimals) + (hasPercent ? "%" : "");
+    return;
+  }
+
+  const currentValue = 0;
+
+  const duration = 1150;
+  const start = performance.now();
+
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const value = currentValue + (target - currentValue) * eased;
+
+    counter.textContent = formatNumber(value, hasDecimals) + (hasPercent ? "%" : "");
+
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    }
+  }
+
+  requestAnimationFrame(tick);
+}
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.classList.add("visible");
+      
+      entry.target.querySelectorAll(".counter").forEach(animateCounter);
+
+      if (entry.target.classList.contains("counter")) {
+        animateCounter(entry.target);
+      }
     });
+  },
+  {
+    threshold: 0.18,
+    rootMargin: "0px 0px -80px 0px",
+  }
+);
 
-    // Number counter animation for the hero stat
-    const counterElement = document.getElementById('activation-rate');
-    const targetValue = 50.92;
-    const duration = 2000; // ms
-    const steps = 60;
-    const stepTime = duration / steps;
-    let currentStep = 0;
+revealItems.forEach((item) => observer.observe(item));
+counters.forEach((counter) => observer.observe(counter));
 
-    const easeOutQuart = (t) => 1 - (--t) * t * t * t;
+function closeOtherInsightCards(activeCard) {
+  insightCards.forEach((card) => {
+    if (card === activeCard) return;
 
-    const counterInterval = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
-        const easedProgress = easeOutQuart(progress);
-        const currentValue = (targetValue * easedProgress).toFixed(2);
-        
-        if (counterElement) {
-            counterElement.textContent = currentValue + '%';
-        }
+    card.classList.remove("is-active");
+    card.setAttribute("aria-expanded", "false");
+  });
+}
 
-        if (currentStep >= steps) {
-            clearInterval(counterInterval);
-            if (counterElement) {
-                counterElement.textContent = '50.92%';
-            }
-        }
-    }, stepTime);
+function toggleInsightCard(card) {
+  const isOpen = card.classList.toggle("is-active");
 
-    // Interactive elements logic (Cards & Bars)
-    const cards = document.querySelectorAll('.interactive-card');
-    const bars = document.querySelectorAll('.interactive-bar');
+  card.setAttribute("aria-expanded", String(isOpen));
 
-    // Function to close all reveals
-    const closeAll = () => {
-        cards.forEach(c => c.classList.remove('active'));
-        bars.forEach(b => b.classList.remove('active'));
-    };
+  if (isOpen) {
+    closeOtherInsightCards(card);
+  }
+}
 
-    // Handle Cards
-    cards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            const isActive = card.classList.contains('active');
-            closeAll();
-            if (!isActive) card.classList.add('active');
-            e.stopPropagation();
-        });
-        
-        // Accessibility: Keyboard support
-        card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                const isActive = card.classList.contains('active');
-                closeAll();
-                if (!isActive) card.classList.add('active');
-            }
-        });
-    });
+insightCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    toggleInsightCard(card);
+  });
 
-    // Handle Bars
-    bars.forEach(bar => {
-        bar.addEventListener('click', (e) => {
-            const isActive = bar.classList.contains('active');
-            closeAll();
-            if (!isActive) bar.classList.add('active');
-            e.stopPropagation();
-        });
-        
-        // Accessibility: Keyboard support
-        bar.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                const isActive = bar.classList.contains('active');
-                closeAll();
-                if (!isActive) bar.classList.add('active');
-            }
-        });
-    });
+  card.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
 
-    // Click outside to close
-    document.addEventListener('click', closeAll);
-    
-    // Add simple scroll reveal for sections
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-    
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.style.opacity = 0;
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(section);
-    });
+    event.preventDefault();
+    toggleInsightCard(card);
+  });
+});
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest(".insight-card")) return;
+
+  insightCards.forEach((card) => {
+    card.classList.remove("is-active");
+    card.setAttribute("aria-expanded", "false");
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const href = link.getAttribute("href");
+
+    if (href === "#") {
+      event.preventDefault();
+      return;
+    }
+
+    const target = document.querySelector(href);
+
+    if (!target) return;
+
+    event.preventDefault();
+    target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+  });
 });
